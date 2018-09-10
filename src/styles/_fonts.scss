@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'trade-gothic-bold-condensed';
+	font-weight: bold;
+	src: local('☺'), url('./fonts/TradeGothicLT-BoldCondensed.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'proxima-nova-regular';
+	font-weight: normal;
+	src: local('☺'), url('./fonts/ProximaNova-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'proxima-nova-light';
+	font-weight: lighter;
+	src: local('☺'), url('./fonts/ProximaNova-Light.otf') format('opentype');
+}
+
+$trade-gothic-bold-condensed:   'trade-gothic-bold-condensed', sans-serif;
+$proxima-nova-regular:          'proxima-nova-regular', sans-serif;
+$proxima-nova-light:            'proxima-nova-light', sans-serif;
+
+
