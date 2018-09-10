@@ -1,7 +1,7 @@
 ## Run the app 
 
-### `npm start`
+### npm start
 
 or
 
-### `yarn start`
+### yarn start
