@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addProductToCart } from '../actions';
+
+import { filter } from 'lodash';
+
+import SelectfieldGroup from './SelectFieldGroup';
 
 class CartForm extends Component {
   constructor(props) {
@@ -14,19 +19,31 @@ class CartForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    const { size } = this.state;
+    if (size) {
+      const { product: { name, colorWay, price, id, permalink, imageUrls }, addProductToCart } = this.props;
+      addProductToCart({ size, name, colorWay, price, id, permalink, image: imageUrls[0] });
+    }
   }
 
   render() {
+    const { size } = this.state;
+    const { product: { stock = []} } = this.props;
+
+    const sizeOptions = filter(stock, (el) => Number(stock.count) !== 0).map((element) => {
+      return element.size
+    });
+
     return (
       <form onSubmit={this.onSubmit}>
         <SelectfieldGroup
-          error={this.getTranslation(combinedErrors.subject)}
-          value={subject}
+          value={size}
           onChange={this.onChange}
-          field='subject'
-          options={subjectOptions}
+          field='size'
           type='text'
-          label={translate('courseFields.language')}
+          options={sizeOptions}
+          placeholder='Size'
+          defaultValue={{name: 'Select a size'}}
         />
         <button
           type='submit'
@@ -39,11 +56,11 @@ class CartForm extends Component {
 }
 
 CartForm.propTypes = {
-  sizes: PropTypes.array
+  product: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {}
 };
 
-export default connect(mapStateToProps, {})(CartForm);
+export default connect(mapStateToProps, { addProductToCart })(CartForm);

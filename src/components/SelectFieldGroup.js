@@ -1,6 +1,6 @@
-import React, { Component }  from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import React, { Component }  from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 class SelectfieldGroup extends Component {
   render() {
@@ -10,10 +10,10 @@ class SelectfieldGroup extends Component {
       const value = typeof (el) === 'object' ? el.value : el
       return (
         <option key={value} onChange={onChange} value={value}>{name}</option>
-      )
-    })
+      );
+    });
 
-    optionValues.splice(0, 0, <option key={defaultValue.value} onChange={onChange} value={defaultValue.value}>{defaultValue.name}</option>)
+    optionValues.splice(0, 0, <option key={defaultValue.value} onChange={onChange} value={defaultValue.value}>{defaultValue.name}</option>);
     return (
       <div className={classnames('form-group', { [`col-md-${12 / layout}`]: typeof (layout) !== 'undefined' })}>
         <select
@@ -27,7 +27,7 @@ class SelectfieldGroup extends Component {
           {optionValues}
         </select>
       </div>
-    )
+    );
   }
 };
 

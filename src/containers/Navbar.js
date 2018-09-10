@@ -48,10 +48,10 @@ class Navbar extends Component {
 
   render() {
     const { activeTabIndex } = this.state;
-    const { listDisplayMode = 'grid', toggleListDisplayMode } = this.props;
+    const { listDisplayMode = 'grid', toggleListDisplayMode, cartSize = 0 } = this.props;
     const cartLink = (
-      <Link className='top-nav-link position-relative' to='#'>
-        <span className='alert d-flex align-items-center justify-content-center'><p className='mb-0'>4</p></span>
+      <Link className='top-nav-link position-relative' to='/checkout'>
+        <span className={`alert ${ cartSize > 0 ? 'd-flex' : 'd-none' } align-items-center justify-content-center`}><p className='mb-0'>{cartSize}</p></span>
         <i className='icon-cart'></i>
       </Link>
     );
@@ -102,9 +102,10 @@ Navbar.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  const { listDisplayMode } = state
+  const { listDisplayMode, cart: { products } } = state
   return {
-    listDisplayMode
+    listDisplayMode,
+    cartSize: products.length
   }
 }
 

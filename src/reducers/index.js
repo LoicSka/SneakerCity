@@ -20,6 +20,21 @@ const listDisplayMode = ( state = { listDisplayMode: 'grid' }, action) => {
     }
 }
 
+const cart = ( state = { products: [] }, action) => {
+    const { type, data } = action;
+    switch (type) {
+        case ActionTypes.ADD_PRODUCT_TO_CART:
+        case ActionTypes.REMOVE_PRODUCT_FROM_CART:
+        case ActionTypes.SET_CART_DATA:
+        return {
+            ...state,
+            products: data 
+        }
+        default:
+        return state 
+    }
+}
+
 // Updates the pagination data for different actions.
 const pagination = combineReducers({
     paginatedProducts: paginate({
@@ -43,7 +58,8 @@ const pagination = combineReducers({
 const rootReducer = combineReducers({
     entities,
     pagination,
-    listDisplayMode
+    listDisplayMode,
+    cart
 });
   
 export default rootReducer;

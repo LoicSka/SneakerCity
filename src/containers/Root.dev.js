@@ -5,12 +5,14 @@ import DevTools from './DevTools';
 import LayoutContainer from './LayoutContainer';
 import ProductsPage from './ProductsPage';
 import ProductPage from './ProductPage';
+import CheckoutPage from './CheckoutPage';
 
 const Root = ({ store }) => (
   <Provider store={store}>
   <div>
     <LayoutContainer exact path='/' component={ProductsPage} />
-    <LayoutContainer exact path='/:permalink' component={ProductPage} />
+    <LayoutContainer exact path='/p/:permalink' component={ProductPage} />
+    <LayoutContainer exact path='/checkout' component={CheckoutPage} />
     <DevTools />
   </div>
   </Provider>

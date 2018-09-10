@@ -13,7 +13,6 @@ class ProductsPage extends Component {
   fecthProducts = (search) => {
     const { loadPaginatedProducts, location } = this.props;
     const { s } = typeof(search) === 'string' ? qs.parse(search) : qs.parse(location.search);
-    console.log('HERE MAte', s);
     s === 'latest' ? loadPaginatedProducts(true) : loadPaginatedProducts();
   }
 
@@ -30,11 +29,12 @@ class ProductsPage extends Component {
   };
 
   render() {
-    const { listDisplayMode = 'grid', products, isFetching } = this.props;
+    const { listDisplayMode = 'grid', products, isFetching, location: { search }  } = this.props;
+    const { s } = qs.parse(search)
     return (
       <div>
         <ProductList isFetching={isFetching} products={products} listDisplayMode={listDisplayMode}/>
-        { !isFetching && products.length > 0 ? <div style={{ height: '200px' }} className='d-flex justify-content-center align-items-center py-4'><button onClick={this.fecthProducts} className='btn btn-outline-primary'>Load more</button></div> : null}
+        { !isFetching && products.length  > 0 && s !== 'latest' ? <div style={{ height: '200px' }} className='d-flex justify-content-center align-items-center py-4'><button onClick={this.fecthProducts} className='btn btn-outline-primary'>Load more</button></div> : null}
       </div>
     );
   };
