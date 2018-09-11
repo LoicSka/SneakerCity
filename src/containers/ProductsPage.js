@@ -13,7 +13,7 @@ class ProductsPage extends Component {
   fecthProducts = (search) => {
     const { loadPaginatedProducts, location } = this.props;
     const { s } = typeof(search) === 'string' ? qs.parse(search) : qs.parse(location.search);
-    s === 'latest' ? loadPaginatedProducts(true) : loadPaginatedProducts();
+    s === 'latest' ? loadPaginatedProducts(true) : loadPaginatedProducts(false);
   }
 
   componentWillReceiveProps = (newProps) => {
@@ -53,7 +53,7 @@ const mapStateToProps = (state, ownProps) => {
   const paginatedProductsValues = values(paginatedProducts);
   const sortedProductsValues = values(sortedProducts);
   const isProductsLoading = paginatedProductsValues[paginatedProductsValues.length - 1] ? paginatedProductsValues[paginatedProductsValues.length - 1].isFetching : false;
-  const isSortedProductsLoading = sortedProducts[sortedProducts.length - 1] ? sortedProducts[sortedProducts.length - 1].isFetching : false;
+  const isSortedProductsLoading = sortedProductsValues[sortedProductsValues.length - 1] ? sortedProductsValues[sortedProductsValues.length - 1].isFetching : false;
   const paginatedProductsIds = paginatedProductsValues.map((product) => product.ids);
   const sortedProductsIds = sortedProductsValues.map((product) => product.ids);
   
